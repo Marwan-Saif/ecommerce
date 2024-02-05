@@ -1,4 +1,6 @@
 import 'package:e_commerce_app/homeScreen.dart';
+import 'package:e_commerce_app/layouts/on_boarding/on_boarding_screen.dart';
+import 'package:e_commerce_app/shared/styles/styles.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,9 +13,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.light,
       title: 'Shop',
-      home: HomeScreen(),
+      home: OnBoardingScreen(),
     );
   }
 }
