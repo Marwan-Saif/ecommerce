@@ -1,4 +1,3 @@
-import 'package:e_commerce_app/homeScreen.dart';
 import 'package:e_commerce_app/layouts/on_boarding/on_boarding_screen.dart';
 import 'package:e_commerce_app/shared/styles/styles.dart';
 import 'package:flutter/material.dart';

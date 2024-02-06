@@ -39,9 +39,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           actions: [
             TextButton(
                 onPressed: () {
-                  navigateWithReplacment(context, ShopLgoinScreen());
+                  navigateWithReplacment(context, const LgoinScreen());
                 }, 
-                child: Text("Skip"))
+                child: const Text("Skip"))
           ],
         ),
         body: Padding(
@@ -85,7 +85,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   FloatingActionButton(
                     onPressed: () {
                       if (isLast) {
-                        navigateWithReplacment(context, ShopLgoinScreen());
+                        navigateWithReplacment(context, const LgoinScreen());
                       } else {
                         pageViewController.nextPage(
                             duration: const Duration(milliseconds: 750),
