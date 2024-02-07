@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/models/boarding_model.dart';
-import 'package:e_commerce_app/modules/login_screen.dart';
+import 'package:e_commerce_app/modules/Login/login_screen.dart';
 import 'package:e_commerce_app/shared/components/components.dart';
+import 'package:e_commerce_app/shared/network/local/cach_helper.dart';
 import 'package:e_commerce_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -31,18 +32,18 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   ];
 
   bool isLast = false;
+  void endOnBoarding() {
+    CachHelper.saveData(key: 'onBoarding', value: true).then((value) {
+      print("cachhelper");
+      if (value!) navigateWithReplacment(context, LoginScreen());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          actions: [
-            TextButton(
-                onPressed: () {
-                  navigateWithReplacment(context, const LgoinScreen());
-                }, 
-                child: const Text("Skip"))
-          ],
+          actions: [defaultTextButton(function: endOnBoarding, text: "Skip")],
         ),
         body: Padding(
           padding: const EdgeInsets.all(30),
@@ -85,7 +86,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   FloatingActionButton(
                     onPressed: () {
                       if (isLast) {
-                        navigateWithReplacment(context, const LgoinScreen());
+                        endOnBoarding();
                       } else {
                         pageViewController.nextPage(
                             duration: const Duration(milliseconds: 750),
