@@ -32,6 +32,7 @@ class UserData {
   }) {}
 
   factory UserData.fromJson(Map<String, dynamic> json) {
+    
     return UserData(
       id: json['id'],
       credit: json['credit'],

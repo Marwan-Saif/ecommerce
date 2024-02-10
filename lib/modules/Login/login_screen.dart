@@ -4,7 +4,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:e_commerce_app/homeScreen.dart';
 import 'package:e_commerce_app/modules/Login/login_cubit.dart';
 import 'package:e_commerce_app/modules/Login/login_states.dart';
-import 'package:e_commerce_app/modules/register_screen.dart';
+import 'package:e_commerce_app/modules/register/register_screen.dart';
 import 'package:e_commerce_app/shared/components/components.dart';
 import 'package:e_commerce_app/shared/network/local/cach_helper.dart';
 import 'package:flutter/material.dart';

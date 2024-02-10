@@ -1,17 +1,20 @@
 import 'package:e_commerce_app/homeScreen.dart';
 import 'package:e_commerce_app/layouts/on_boarding/on_boarding_screen.dart';
 import 'package:e_commerce_app/modules/Login/login_screen.dart';
+import 'package:e_commerce_app/shared/components/constants.dart';
+import 'package:e_commerce_app/shared/cubit/cubit.dart';
 import 'package:e_commerce_app/shared/network/local/cach_helper.dart';
 import 'package:e_commerce_app/shared/network/remote/dio_helper.dart';
 import 'package:e_commerce_app/shared/styles/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   DioHelper.init();
   WidgetsFlutterBinding.ensureInitialized();
   await CachHelper.init();
   bool onBoarding = CachHelper.getData(key: 'onBoarding');
-  String? token = CachHelper.getData(key: 'token');
+  token= CachHelper.getData(key: 'token');
   print(onBoarding);
   Widget widget;
 
@@ -38,13 +41,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: ThemeMode.light,
-      title: 'Shop',
-      home: widget,
-    );
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (BuildContext context) => ShopCubit()..getHomeData()),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: ThemeMode.light,
+          title: 'Shop',
+          home: widget,
+        ));
   }
 }
