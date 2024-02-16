@@ -34,6 +34,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   bool isLast = false;
   void endOnBoarding() {
     CachHelper.saveData(key: 'onBoarding', value: true).then((value) {
+      // ignore: avoid_print
       print("cachhelper");
       if (value!) navigateWithReplacment(context, LoginScreen());
     });

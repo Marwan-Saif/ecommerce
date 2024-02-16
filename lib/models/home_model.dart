@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 
 class HomeModel {
   late bool status;
@@ -43,24 +42,24 @@ class ProductsModel {
   final int id;
   final dynamic price;
   final dynamic discount;
-  final dynamic old_price;
+  final dynamic oldPrice;
   final String image;
   final String name;
   final String description;
-  final bool in_favorites;
-  final bool in_cart;
+  final bool inFavorites;
+  final bool inCart;
 
   ProductsModel({
     required this.id,
     required this.price,
     required this.discount,
-    required this.old_price,
+    required this.oldPrice,
     required this.image,
     required this.name,
     required this.description,
    
-    required this.in_favorites,
-    required this.in_cart,
+    required this.inFavorites,
+    required this.inCart,
   });
 
   factory ProductsModel.fromJson(Map<String, dynamic> json) {
@@ -68,13 +67,13 @@ class ProductsModel {
       id: json['id'],
       price: json['price'],
       discount: json['discount'],
-      old_price: json['old_price'],
+      oldPrice: json['old_price'],
       image: json['image'],
       name: json['name'],
       description: json['description'],
       
-      in_favorites: json['in_favorites'],
-      in_cart: json['in_cart'],
+      inFavorites: json['in_favorites'],
+      inCart: json['in_cart'],
     );
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison, prefer_const_constructors
+
 import 'package:e_commerce_app/homeScreen.dart';
 import 'package:e_commerce_app/layouts/on_boarding/on_boarding_screen.dart';
 import 'package:e_commerce_app/modules/Login/login_screen.dart';
@@ -14,7 +16,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CachHelper.init();
   bool onBoarding = CachHelper.getData(key: 'onBoarding');
-  token= CachHelper.getData(key: 'token');
+  token = CachHelper.getData(key: 'token');
+  // ignore: avoid_print
   print(onBoarding);
   Widget widget;
 
@@ -36,7 +39,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final bool onBoarding;
   final Widget widget;
-  const MyApp({required this.onBoarding, required this.widget});
+  const MyApp({super.key, required this.onBoarding, required this.widget});
 
   // This widget is the root of your application.
   @override
@@ -44,7 +47,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (BuildContext context) => ShopCubit()..getHomeData()),
+              create: (BuildContext context) => ShopCubit()
+                ..getHomeData()
+                ..getCategoriesData()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

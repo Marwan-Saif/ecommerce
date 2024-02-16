@@ -17,13 +17,13 @@ class HomeScreen extends StatelessWidget {
         var cubit = ShopCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            title: Text("marooooooo"),
+            title: const Text("marooooooo"),
             actions: [
               IconButton(
                   onPressed: () {
-                    navigateTo(context, SearchScreen());
+                    navigateTo(context, const SearchScreen());
                   },
-                  icon: Icon(Icons.search))
+                  icon: const Icon(Icons.search))
             ],
           ),
           body: cubit.bottomScreens[cubit.currentIndex],
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
             onTap: (index) {
               cubit.changeBottom(index);
             },
-            items: [
+            items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.apps), label: 'categories'),

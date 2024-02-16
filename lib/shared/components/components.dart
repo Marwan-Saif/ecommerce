@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -99,3 +99,11 @@ void printAll(String text) {
   pattern.allMatches(text).forEach((match) => print(match.group(0)));
 }
 
+Widget myDivider() => Padding(
+      padding: const EdgeInsetsDirectional.only(start: 20.0, end: 20.0),
+      child: Container(
+        width: double.infinity,
+        color: Colors.grey,
+        height: 1.0,
+      ),
+    );

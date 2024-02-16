@@ -1,4 +1,5 @@
-import 'package:e_commerce_app/modules/Login/login_states.dart';
+// ignore_for_file: avoid_print
+
 
 abstract class ShopStates {}
 
@@ -13,6 +14,7 @@ class ShopSuccessHomeState extends ShopStates {
 }
 
 class ShopLoadingHomeState extends ShopStates {
+  // ignore: non_constant_identifier_names
   LoginLoadingState() {
     print("loading");
   }
@@ -23,6 +25,27 @@ class ShopErrorHomeState extends ShopStates {
 
   ShopErrorHomeState({required this.error}) {
     print("error");
+    print(error);
+  }
+}
+
+class ShopSuccessCategoriesState extends ShopStates {
+  ShopSuccessCategoriesState() {
+    print("Categories success");
+  }
+}
+
+class ShopLoadingCategoriesState extends ShopStates {
+  ShopLoadingCategoriesState() {
+    print("Categories loading");
+  }
+}
+
+class ShopErrorCategoriesState extends ShopStates {
+  final String error;
+
+  ShopErrorCategoriesState({required this.error}) {
+    print("Categories  error");
     print(error);
   }
 }

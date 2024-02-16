@@ -1,5 +1,7 @@
 // import 'dart:html';
 
+// ignore_for_file: avoid_print
+
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:e_commerce_app/homeScreen.dart';
 import 'package:e_commerce_app/modules/Login/login_cubit.dart';
@@ -11,7 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
-  var formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
+
+  LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
     var emailController = TextEditingController();
@@ -26,7 +30,7 @@ class LoginScreen extends StatelessWidget {
               CachHelper.saveData(
                       key: 'token', value: state.loginMode.data!.token)
                   .then((value) {
-                navigateWithReplacment(context, HomeScreen());
+                navigateWithReplacment(context, const HomeScreen());
               });
             }
             print(state.loginMode.message);
@@ -69,6 +73,7 @@ class LoginScreen extends StatelessWidget {
                               if (value.toString().isEmpty) {
                                 return "please enter username";
                               }
+                              return null;
                             },
                             prefix: Icons.email_outlined),
                         const SizedBox(
@@ -93,6 +98,7 @@ class LoginScreen extends StatelessWidget {
                               if (value.toString().isEmpty) {
                                 return "Enter password ";
                               }
+                              return null;
                             },
                             prefix: Icons.lock_outlined,
                             suffix: LoginCubit.get(context).suffix,

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:e_commerce_app/models/login_model.dart';
 import 'package:e_commerce_app/modules/Login/login_states.dart';
 import 'package:e_commerce_app/shared/network/end_points.dart';
