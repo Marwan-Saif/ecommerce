@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/models/categories_model.dart';
+import 'package:e_commerce_app/models/favorites_model.dart';
 import 'package:e_commerce_app/models/home_model.dart';
 import 'package:e_commerce_app/modules/cateogries/categories_screen.dart';
 import 'package:e_commerce_app/modules/favorites/favorites_screen.dart';
@@ -58,6 +59,41 @@ class ShopCubit extends Cubit<ShopStates> {
       emit(ShopSuccessCategoriesState());
     }).catchError((error) {
       emit(ShopErrorCategoriesState(error: error.toString()));
+    });
+  }
+
+  void changeFavorites({required int productId}) {
+    favorites[productId] = !favorites[productId]!;
+    emit(ShopChangeLiveFavoritesState());
+    DioHelper.postData(
+            url: favoritesEndPoint,
+            data: {'product_id': productId},
+            token: token)
+        .then((value) {
+      if (value.data['status'] == false) {
+        favorites[productId] = !favorites[productId]!;
+      } else {
+        getFavData();
+      }
+      emit(ShopSuccessChangeFavoritesState());
+    }).catchError((e) {
+      favorites[productId] = !favorites[productId]!;
+      emit(ShopErrorChangeFavoritesState());
+    });
+  }
+
+  FavoritesModel? favoritesModel;
+  void getFavData() {
+    emit(ShopGetFavDataLoadingState());
+    DioHelper.getData(url: favoritesEndPoint, token: token).then((value) {
+      favoritesModel = FavoritesModel.fromJson(value.data);
+
+      // printAll(value.data.toString());
+      // print(favoritesModel!.message);
+      // print("object");
+      emit(ShopGetFavDataSuccessState());
+    }).catchError((error) {
+      emit(ShopGetFavDataErrorState());
     });
   }
 }

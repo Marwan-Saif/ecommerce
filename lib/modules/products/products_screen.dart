@@ -20,13 +20,15 @@ class ProductsScreen extends StatelessWidget {
                   ShopCubit.get(context).categoriesModel != null,
               builder: (context) => ProductsBuilder(
                   ShopCubit.get(context).homeModel!,
-                  ShopCubit.get(context).categoriesModel!),
+                  ShopCubit.get(context).categoriesModel!,
+                  context),
               fallback: (context) =>
                   const Center(child: CircularProgressIndicator()),
             ));
   }
 
-  Widget ProductsBuilder(HomeModel model, CategoriesModel categoriesModel) {
+  Widget ProductsBuilder(
+      HomeModel model, CategoriesModel categoriesModel, context) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Column(
@@ -66,7 +68,7 @@ class ProductsScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Container(
+                SizedBox(
                   height: 100,
                   width: double.infinity,
                   child: ListView.separated(
@@ -74,7 +76,8 @@ class ProductsScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) =>
                           buildCategoryItem(categoriesModel.data!.data[index]),
-                      separatorBuilder: (context, index) => const SizedBox(width: 10),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(width: 10),
                       itemCount: categoriesModel.data!.data.length),
                 ),
                 const SizedBox(
@@ -99,8 +102,11 @@ class ProductsScreen extends StatelessWidget {
               mainAxisSpacing: 1,
               childAspectRatio: 1 / 1.58,
               physics: const NeverScrollableScrollPhysics(),
-              children: List.generate(model.data!.products.length,
-                  (index) => buildGrideProduct(model.data!.products[index])),
+              children: List.generate(
+                model.data!.products.length,
+                (index) =>
+                    buildGrideProduct(model.data!.products[index], context),
+              ),
             ),
           ),
         ],
@@ -108,7 +114,7 @@ class ProductsScreen extends StatelessWidget {
     );
   }
 
-  Widget buildGrideProduct(ProductsModel model) => Container(
+  Widget buildGrideProduct(ProductsModel model, context) => Container(
         color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,14 +175,24 @@ class ProductsScreen extends StatelessWidget {
                       const Spacer(),
                       IconButton(
                           onPressed: () {
-                            // ignore: avoid_print
-                            print(model.id);
-                            // ignore: avoid_print
-                            print(model.inFavorites);
+                            ShopCubit.get(context)
+                                .changeFavorites(productId: model.id);
+                          
+                            // print(model.id);
+                            // print(ShopCubit.get(context).favorites[model.id]);
+                            // print(model.inFavorites);
                           },
-                          icon: Icon(model.inFavorites
-                              ? Icons.favorite
-                              : Icons.favorite_border))
+                          icon: CircleAvatar(
+                            backgroundColor:
+                                ShopCubit.get(context).favorites[model.id]!
+                                    ? defaultColor
+                                    : Colors.grey,
+                            child: const Icon(
+                              Icons.favorite_border,
+                              size: 14,
+                              color: Colors.white,
+                            ),
+                          ))
                     ],
                   ),
                 ],

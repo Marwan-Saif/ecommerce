@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 
-
 abstract class ShopStates {}
 
 class ShopInitialState extends ShopStates {}
@@ -49,3 +48,14 @@ class ShopErrorCategoriesState extends ShopStates {
     print(error);
   }
 }
+
+class ShopErrorChangeFavoritesState extends ShopStates {}
+
+class ShopChangeLiveFavoritesState extends ShopStates {}
+
+class ShopSuccessChangeFavoritesState extends ShopStates {}
+
+class ShopGetFavDataSuccessState extends ShopStates {}
+class ShopGetFavDataLoadingState extends ShopStates {}
+class ShopGetFavDataErrorState extends ShopStates {}
+
